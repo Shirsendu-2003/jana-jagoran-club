@@ -507,6 +507,9 @@ export function PublicFooter() {
             <p className="text-xs text-brand-200 text-center md:text-left">
               © {new Date().getFullYear()} Jana Jagoran Club. All rights
               reserved.
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-white/10 border border-white/10 text-brand-300 font-medium">
+  v0.1
+</span>
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-brand-200">
