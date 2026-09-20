@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   MapPin,
   Mail,
@@ -12,8 +12,8 @@ import {
   ExternalLink,
   Menu,
   X,
-} from 'lucide-react';
-import { publicApi } from '../api/endpoints';
+} from "lucide-react";
+import { publicApi } from "../api/endpoints";
 
 /**
  * Shared public header
@@ -28,9 +28,7 @@ export function PublicHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3">
-
         <div className="flex items-center justify-between">
-
           {/* Logo */}
           <Link
             to="/"
@@ -52,7 +50,6 @@ export function PublicHeader() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6">
-
             <Link
               to="/"
               className="text-sm font-medium text-gray-700 hover:text-maroon-800 transition-colors"
@@ -74,8 +71,6 @@ export function PublicHeader() {
               Membership
             </Link>
 
-          
-
             <Link
               to="/faqs"
               className="text-sm font-medium text-gray-700 hover:text-maroon-800 transition-colors"
@@ -90,13 +85,9 @@ export function PublicHeader() {
               Sign In
             </Link>
 
-            <Link
-              to="/register"
-              className="btn-primary text-sm"
-            >
+            <Link to="/register" className="btn-primary text-sm">
               Join the Club
             </Link>
-
           </nav>
 
           {/* Mobile Menu Button */}
@@ -107,21 +98,14 @@ export function PublicHeader() {
             aria-label="Toggle navigation menu"
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? (
-              <X size={26} />
-            ) : (
-              <Menu size={26} />
-            )}
+            {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
           </button>
-
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-gray-100 mt-3 pt-3 pb-2">
-
             <nav className="flex flex-col gap-1">
-
               <Link
                 to="/"
                 onClick={closeMobileMenu}
@@ -187,12 +171,9 @@ export function PublicHeader() {
               >
                 Join the Club
               </Link>
-
             </nav>
-
           </div>
         )}
-
       </div>
     </header>
   );
@@ -202,10 +183,10 @@ export function PublicHeader() {
  * Shared public footer
  */
 export function PublicFooter() {
-  const [email, setEmail] = React.useState('');
+  const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState({
-    type: '',
-    message: '',
+    type: "",
+    message: "",
   });
   const [submitting, setSubmitting] = React.useState(false);
 
@@ -216,25 +197,25 @@ export function PublicFooter() {
 
     setSubmitting(true);
     setStatus({
-      type: '',
-      message: '',
+      type: "",
+      message: "",
     });
 
     try {
       const res = await publicApi.subscribeNewsletter(email.trim());
 
       setStatus({
-        type: 'success',
+        type: "success",
         message: res.data.message,
       });
 
-      setEmail('');
+      setEmail("");
     } catch (err) {
       setStatus({
-        type: 'error',
+        type: "error",
         message:
           err?.response?.data?.message ||
-          'Subscription failed. Please try again.',
+          "Subscription failed. Please try again.",
       });
     } finally {
       setSubmitting(false);
@@ -243,17 +224,12 @@ export function PublicFooter() {
 
   return (
     <footer className="bg-maroon-900 text-white">
-
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
           {/* ================= CLUB INFORMATION ================= */}
           <div>
-
             <div className="flex items-center gap-3 mb-5">
-
               <div className="w-12 h-12 rounded-full overflow-hidden bg-white flex items-center justify-center flex-shrink-0">
                 <img
                   src="/logo.png"
@@ -267,11 +243,8 @@ export function PublicFooter() {
                   Jana Jagoran Club
                 </h3>
 
-                <p className="text-xs text-brand-200">
-                  Estd. 2016
-                </p>
+                <p className="text-xs text-brand-200">Estd. 2016</p>
               </div>
-
             </div>
 
             <p className="text-sm text-brand-100 leading-relaxed mb-5">
@@ -281,44 +254,50 @@ export function PublicFooter() {
             </p>
 
             <div className="space-y-3 text-sm text-brand-100">
-
               {/* Address */}
+              {/* Address + Google Maps */}
               <div className="flex items-start gap-3">
                 <MapPin
                   size={17}
                   className="text-brand-300 mt-0.5 flex-shrink-0"
                 />
 
-                <span>
-                  Jana Jagoran Club
-                  <br />
-                  Gokarna, Kandi
-                  <br />
-                  Murshidabad, West Bengal
-                </span>
+                <div>
+                  <p>
+                    Jana Jagoran Club
+                    <br />
+                    Gokarna, Kandi
+                    <br />
+                    Murshidabad, West Bengal
+                  </p>
+
+                  <a
+                    href="https://maps.app.goo.gl/HTgXurJpq6sn72Sf8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-2 text-sm text-brand-300 hover:text-brand-200 transition-colors"
+                  >
+                    View on Google Maps
+                    <ExternalLink size={14} />
+                  </a>
+                </div>
               </div>
 
               {/* Email */}
               <div className="flex items-center gap-3">
-                <Mail
-                  size={17}
-                  className="text-brand-300 flex-shrink-0"
-                />
+                <Mail size={17} className="text-brand-300 flex-shrink-0" />
 
                 <a
-                  href="mailto:info@janajagoranclub.org"
+                  href="mailto:janajagoranclub@gmail.com"
                   className="hover:text-brand-300 transition-colors"
                 >
-                  info@janajagoranclub.org
+                  janajagoranclub@gmail.com
                 </a>
               </div>
 
               {/* Phone */}
               <div className="flex items-center gap-3">
-                <Phone
-                  size={17}
-                  className="text-brand-300 flex-shrink-0"
-                />
+                <Phone size={17} className="text-brand-300 flex-shrink-0" />
 
                 <a
                   href="tel:+91XXXXXXXXXX"
@@ -341,25 +320,16 @@ export function PublicFooter() {
                   6:00 PM – 8:00 PM
                 </span>
               </div>
-
             </div>
-
           </div>
 
           {/* ================= QUICK LINKS ================= */}
           <div>
-
-            <h3 className="font-display font-bold text-lg mb-5">
-              Quick Links
-            </h3>
+            <h3 className="font-display font-bold text-lg mb-5">Quick Links</h3>
 
             <ul className="space-y-3 text-sm text-brand-100">
-
               <li>
-                <Link
-                  to="/"
-                  className="hover:text-brand-300 transition-colors"
-                >
+                <Link to="/" className="hover:text-brand-300 transition-colors">
                   Home
                 </Link>
               </li>
@@ -383,19 +353,13 @@ export function PublicFooter() {
               </li>
 
               <li>
-                <Link
-                  to="/"
-                  className="hover:text-brand-300 transition-colors"
-                >
+                <Link to="/" className="hover:text-brand-300 transition-colors">
                   Events Calendar
                 </Link>
               </li>
 
               <li>
-                <Link
-                  to="/"
-                  className="hover:text-brand-300 transition-colors"
-                >
+                <Link to="/" className="hover:text-brand-300 transition-colors">
                   Photo Gallery
                 </Link>
               </li>
@@ -417,14 +381,11 @@ export function PublicFooter() {
                   Member / Staff Login
                 </Link>
               </li>
-
             </ul>
-
           </div>
 
           {/* ================= SOCIAL MEDIA ================= */}
           <div>
-
             <h3 className="font-display font-bold text-lg mb-5">
               Connect With Us
             </h3>
@@ -435,7 +396,6 @@ export function PublicFooter() {
             </p>
 
             <div className="flex items-center gap-3">
-
               {/* Facebook */}
               <a
                 href="https://www.facebook.com/share/1HjRRPeFrk/"
@@ -468,11 +428,9 @@ export function PublicFooter() {
               >
                 <Twitter size={19} />
               </a>
-
             </div>
 
             <div className="mt-6">
-
               <p className="text-xs text-brand-200 mb-2">
                 Follow us for the latest updates
               </p>
@@ -486,14 +444,11 @@ export function PublicFooter() {
                 Visit our Facebook page
                 <ExternalLink size={14} />
               </a>
-
             </div>
-
           </div>
 
           {/* ================= NEWSLETTER ================= */}
           <div>
-
             <h3 className="font-display font-bold text-lg mb-5">
               Stay Updated
             </h3>
@@ -507,9 +462,9 @@ export function PublicFooter() {
             {status.message && (
               <div
                 className={`text-xs rounded-lg px-3 py-2 mb-3 ${
-                  status.type === 'success'
-                    ? 'bg-green-500/20 text-green-100'
-                    : 'bg-red-500/20 text-red-100'
+                  status.type === "success"
+                    ? "bg-green-500/20 text-green-100"
+                    : "bg-red-500/20 text-red-100"
                 }`}
               >
                 {status.message}
@@ -517,11 +472,7 @@ export function PublicFooter() {
             )}
 
             {/* Form */}
-            <form
-              onSubmit={subscribe}
-              className="space-y-3"
-            >
-
+            <form onSubmit={subscribe} className="space-y-3">
               <input
                 type="email"
                 required
@@ -538,37 +489,27 @@ export function PublicFooter() {
               >
                 <Send size={16} />
 
-                {submitting
-                  ? 'Subscribing...'
-                  : 'Subscribe'}
+                {submitting ? "Subscribing..." : "Subscribe"}
               </button>
-
             </form>
 
             <p className="text-[11px] text-brand-300 mt-3">
               We respect your privacy. You can unsubscribe anytime.
             </p>
-
           </div>
-
         </div>
-
       </div>
 
       {/* ================= COPYRIGHT ================= */}
       <div className="border-t border-maroon-700">
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
-
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-
             <p className="text-xs text-brand-200 text-center md:text-left">
-              © {new Date().getFullYear()} Jana Jagoran Club.
-              All rights reserved.
+              © {new Date().getFullYear()} Jana Jagoran Club. All rights
+              reserved.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-brand-200">
-
               <Link
                 to="/privacy-policy"
                 className="hover:text-brand-300 transition-colors"
@@ -576,9 +517,7 @@ export function PublicFooter() {
                 Privacy Policy
               </Link>
 
-              <span className="text-maroon-600">
-                |
-              </span>
+              <span className="text-maroon-600">|</span>
 
               <Link
                 to="/code-of-conduct"
@@ -587,9 +526,7 @@ export function PublicFooter() {
                 Code of Conduct
               </Link>
 
-              <span className="text-maroon-600">
-                |
-              </span>
+              <span className="text-maroon-600">|</span>
 
               <Link
                 to="/faqs"
@@ -597,15 +534,10 @@ export function PublicFooter() {
               >
                 FAQs
               </Link>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
     </footer>
   );
 }
@@ -613,44 +545,28 @@ export function PublicFooter() {
 /**
  * Wrapper for simple public content pages
  */
-export default function PublicLayout({
-  title,
-  subtitle,
-  children,
-}) {
+export default function PublicLayout({ title, subtitle, children }) {
   return (
     <div className="min-h-screen bg-[#fdf7f2] flex flex-col">
-
       <PublicHeader />
 
       <main className="flex-1">
-
         {title && (
           <div className="bg-gradient-to-br from-maroon-800 via-maroon-700 to-brand-600 text-white">
-
             <div className="max-w-4xl mx-auto px-4 sm:px-6 py-14">
-
               <h1 className="text-3xl sm:text-4xl font-display font-bold mb-2">
                 {title}
               </h1>
 
-              {subtitle && (
-                <p className="text-brand-100">
-                  {subtitle}
-                </p>
-              )}
-
+              {subtitle && <p className="text-brand-100">{subtitle}</p>}
             </div>
-
           </div>
         )}
 
         {children}
-
       </main>
 
       <PublicFooter />
-
     </div>
   );
 }
